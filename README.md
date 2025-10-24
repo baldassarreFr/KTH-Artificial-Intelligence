@@ -11,5 +11,3 @@ We explore Hidden Markov Models and algorithms to infere probability distributio
 
 ## RL
 We implement the Q-learning algorithm and train it using linear scheduling epsilon greedy policy. We then investigate the hyperparameters of the model and their effect on its performance.
-
-<p align="center"><img src="/Search/fig.png" width="500"/></p>
