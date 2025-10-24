@@ -1,0 +1,79 @@
+%%  SWISH skeleton for "Colleagues" puzzle
+
+% Render the solution as a nice table.
+:- use_rendering(table,[header(p('Colleague', 'Department', 'Floor', 'Lunch', 'Commute'))]).
+
+% Two colleagues are team_members if they work on the same floor.
+team_members(C1, C2, Ls) :-
+    member(p(C1, _, Floor1, _, _), Ls),
+    member(p(C2, _, Floor2, _, _), Ls),
+    not(C1 == C2),
+    Floor1 = Floor2.
+
+
+% The facts:
+fact1(Ls) :-
+    member(p(c3, _, f11, _, _), Ls).
+
+fact2(Ls) :-
+    member(p(c1, _, _, _, bicycle), Ls).
+
+fact3(Ls) :- 
+    member(p(c4, sales, _, _, _), Ls).
+
+fact4(Ls) :-
+    member(p(_, _, _, salad, metro), Ls).
+
+fact5(Ls) :-
+    team_members(c2, c4, Ls).
+
+fact6(Ls) :- 
+    findall(C, member(p(C, _, f10, _, _), Ls), C1s),
+    length(C1s, 2),
+    findall(C, member(p(C, _, f11, _, _), Ls),C2s),
+    length(C2s, 2).
+
+fact7(Ls) :-
+    member(p(_, engineering, _, _, car), Ls).
+
+fact8(Ls) :-
+    not(
+        (member(p(_, D, f10, _, _), Ls),
+         D \= engineering,
+         D \= sales)
+    ).
+
+fact9(Ls) :-
+	not(
+        (member(p(_, sales, _, L, _), Ls),
+        L \= sushi)
+    ).
+
+fact10(Ls) :-
+    member(p(C1, _, _, _, bicycle), Ls),
+    team_members(C1, C2, Ls),
+    member(p(C2, marketing, _, _, _), Ls).
+
+
+
+% Problem:
+colleagues(Ls) :-
+    length(Ls, 4),                      % There are 4 colleagues in our list Ls
+    member(p(c1, _, _, _, _), Ls), member(p(c2, _, _, _, _), Ls), member(p(c3, _, _, _, _), Ls), member(p(c4, _, _, _, _), Ls), % One of them is c1, one is c2, etc.
+    member(p(_, engineering, _, _, _), Ls), member(p(_, marketing, _, _, _), Ls), member(p(_, sales, _, _, _), Ls), member(p(_, hr, _, _, _), Ls), % One of them is in engineering, one in marketing, etc.
+    member(p(_, _, f10, _, _), Ls), member(p(_, _, f11, _, _), Ls), % Some work on f10, some on f11
+    member(p(_, _, _, sushi, _), Ls), member(p(_, _, _, pizza, _), Ls), member(p(_, _, _, salad, _), Ls), member(p(_, _, _, sandwich, _), Ls), % One of them eats sushi, one pizza, etc.
+    member(p(_, _, _, _, metro), Ls), member(p(_, _, _, _, car), Ls), member(p(_, _, _, _, bicycle), Ls), member(p(_, _, _, _, walk), Ls), % One of them takes the metro, one the car, etc.
+    fact1(Ls),
+    fact2(Ls),
+    fact3(Ls),
+    fact4(Ls),
+    fact5(Ls),
+    fact6(Ls),
+    fact7(Ls),
+    fact8(Ls),
+    fact9(Ls),
+    fact10(Ls),
+    !.
+
+% To see the results, run: ?- colleagues(Ls).

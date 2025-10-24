@@ -1,0 +1,12 @@
+(define (problem vet-problem)
+
+    (:domain vet-domain)
+    (:objects c d tab t1 t2 floor s)
+    (:init (cat c)(dog d)(animal c)(animal d)
+            (object t1)(object t2)(object s)(treat t1)(treat t2)(syringe s)
+            (loc floor)(loc tab)(table tab)
+            (free-animal)(free-object)
+            (at s tab)(at t1 tab)(at t2 tab)(at d floor)(at c floor)
+    )
+    (:goal (and (cured c)(cured d)(at c floor)(at d floor)))
+)

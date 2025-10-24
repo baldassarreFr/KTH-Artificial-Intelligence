@@ -1,0 +1,27 @@
+name: rl
+channels:
+  - defaults
+dependencies:
+  - ca-certificates=2020.6.24
+  - certifi=2020.6.20
+  - libffi
+  - openssl=1.1.1g
+  - pip=20.2.1
+  - python=3.7.7
+  - setuptools=49.3.1
+  - sqlite=3.32.3
+  - tk=8.6.10
+  - wheel=0.34.2
+  - xz=5.2.5
+  - zlib=1.2.11
+  - pip:
+      - chardet==3.0.4
+      - docutils==0.16
+      - idna==2.10
+      - kivy==1.11.0
+      - kivy-garden==0.1.4
+      - numpy==1.16.4
+      - pygments==2.6.1
+      - pyyaml==5.1.1
+      - requests==2.24.0
+      - urllib3==1.25.10
